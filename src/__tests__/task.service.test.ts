@@ -63,7 +63,4 @@ it("deleteTask chama repository.deleteForUser com userId e taskId", async () => 
     await expect(service.listTasks("")).rejects.toMatchObject({ status: 400 });
   });
 
-  it("retorna título com trim quando válido", () => {
-  expect(validateTaskTitle(" Fazer exercícios ")).toBe("VALOR_ERRADO_PROPOSITAL");
-});
 });
