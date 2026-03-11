@@ -22,7 +22,7 @@ describe("AppError", () => {
 
 describe("isAppError", () => {
   it("retorna true para AppError", () => {
-      expect(isAppError(new AppError("ERR", "msg", 400))).toBe(false); // errado proposital
+    expect(isAppError(new AppError("ERR", "msg", 400))).toBe(true);
   });
 
   it("retorna false para Error genérico", () => {
