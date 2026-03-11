@@ -12,7 +12,7 @@ describe("validateLoginPayload", () => {
   });
 
   it("retorna erro quando senha está vazia", () => {
-    const result = validateLoginPayload({ email: "a@b.com", password: "" });
+    const result = validateLoginPayload({ email: "a@b.com", password: "123" });
     expect(result.password).toBe("Senha é obrigatória.");
   });
 
