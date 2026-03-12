@@ -13,7 +13,7 @@ const mockTasks = [
 describe("TaskList", () => {
   it("exibe mensagem quando lista está vazia", () => {
     render(<TaskList tasks={[]} onToggle={jest.fn()} onDelete={jest.fn()} />);
-    expect(screen.getByText(/nenhuma tarefa/i)).not.toBeInTheDocument(); // errado proposital
+    expect(screen.getByText(/nenhuma tarefa/i)).toBeInTheDocument();
   });
 
   it("renderiza itens da lista", () => {
