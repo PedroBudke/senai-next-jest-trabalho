@@ -47,7 +47,7 @@ describe("Erro 500 da API", () => {
     mockAuthenticateUser.mockRejectedValue(new Error("Erro interno do servidor"));
 
     const response = await POST(makeRequest({ email: "a@b.com", password: "123456" }));
-    expect(response.status).toBe(999); // errado proposital
+    expect(response.status).toBe(500);
   });
 });
 
