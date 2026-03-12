@@ -33,7 +33,7 @@ describe("AuthProvider", () => {
         <TestConsumer />
       </AuthProvider>,
     );
-    expect(screen.getByTestId("user-email")).toHaveTextContent("ERRADO_PROPOSITAL"); // 🔴 Red
+    expect(screen.getByTestId("user-email")).toHaveTextContent("test@test.com");
   });
 
   it("estado inicial user é o initialUser passado", () => {
