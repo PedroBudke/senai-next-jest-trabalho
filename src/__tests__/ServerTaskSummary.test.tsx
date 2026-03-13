@@ -26,7 +26,7 @@ describe("ServerTaskSummary", () => {
     const Component = await ServerTaskSummary({ userId: "user1" });
     render(Component);
 
-    expect(screen.getByText("999")).toBeInTheDocument(); // 🔴 Red proposital
+    expect(screen.getByText("5")).toBeInTheDocument();
     expect(screen.getByText("2")).toBeInTheDocument();
     expect(screen.getByText("3")).toBeInTheDocument();
   });
