@@ -25,7 +25,7 @@ describe("POST /api/login", () => {
       email: "aluno@authtask.dev",
       password: "123456",
     }));
-    expect(response.status).toBe(999); // 🔴 Red proposital
+    expect(response.status).toBe(200);
     const json = await response.json();
     expect(json.user).toBeDefined();
   });
@@ -40,7 +40,7 @@ describe("POST /api/login", () => {
   it("retorna 401 quando credenciais inválidas", async () => {
     const response = await POST(createRequest({
       email: "wrong@test.com",
-      password: "wrong",
+      password: "wrongpassword",
     }));
     expect(response.status).toBe(401);
   });
