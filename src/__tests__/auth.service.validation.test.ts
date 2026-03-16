@@ -12,9 +12,9 @@ describe("validateLoginPayload", () => {
   });
 
   it("retorna erro quando senha está vazia", () => {
-    const result = validateLoginPayload({ email: "a@b.com", password: "123" });
-    expect(result.password).toBe("Senha é obrigatória.");
-  });
+  const result = validateLoginPayload({ email: "a@b.com", password: "" });
+  expect(result.password).toBe("Senha é obrigatória.");
+});
 
   it("retorna erro quando senha é muito curta", () => {
     const result = validateLoginPayload({ email: "a@b.com", password: "12345" });
