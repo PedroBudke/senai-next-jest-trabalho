@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor  } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { DashboardClient } from "@/components/dashboard/DashboardClient";
 
@@ -53,5 +53,65 @@ describe("DashboardClient", () => {
     });
     render(<DashboardClient />);
     expect(await screen.findByText("Erro ao carregar tarefas.")).toBeInTheDocument();
+  });
+  
+  it("cria tarefa e adiciona à lista", async () => {
+  global.fetch = jest.fn()
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ tasks: [{ id: "1", title: "Tarefa existente", completed: false }] }),
+    })
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ task: { id: "2", title: "Nova tarefa", completed: false } }),
+    });
+
+  const user = userEvent.setup();
+  render(<DashboardClient />);
+  await screen.findByText("Painel de Tarefas");
+
+  const input = screen.getByPlaceholderText(/nova tarefa/i);
+  await user.type(input, "Nova tarefa");
+  await user.click(screen.getByRole("button", { name: /adicionar/i }));
+
+  expect(await screen.findByText("Nova tarefa")).toBeInTheDocument();
+});
+
+it("deleta tarefa da lista", async () => {
+  global.fetch = jest.fn()
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ tasks: [{ id: "1", title: "Tarefa para deletar", completed: false }] }),
+    })
+    .mockResolvedValueOnce({ ok: true, json: async () => ({}) });
+
+  const user = userEvent.setup();
+  render(<DashboardClient />);
+  await screen.findByText("Tarefa para deletar");
+
+  await user.click(screen.getByRole("button", { name: /deletar/i }));
+  await waitFor(() => {
+    expect(screen.queryByText("Tarefa para deletar")).not.toBeInTheDocument();
+  });
+});
+
+it("toggle tarefa como concluída", async () => {
+  global.fetch = jest.fn()
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ tasks: [{ id: "1", title: "Tarefa toggle", completed: false }] }),
+    })
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ task: { id: "1", title: "Tarefa toggle", completed: true } }),
+    });
+
+  const user = userEvent.setup();
+  render(<DashboardClient />);
+  await screen.findByText("Tarefa toggle");
+
+  const checkbox = screen.getByRole("checkbox");
+  await user.click(checkbox);
+  expect(global.fetch).toHaveBeenCalledTimes(2);
   });
 });
