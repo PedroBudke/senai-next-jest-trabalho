@@ -11,23 +11,23 @@ const config: Config = {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
   collectCoverageFrom: [
-  "src/**/*.{ts,tsx}",
-  "!src/**/*.d.ts",
-  "!src/**/__tests__/**",
-  "!src/app/**/page.tsx",
-  "!src/app/**/layout.tsx",
-  "!src/app/api/logout/**",
-  "!src/app/api/tasks/**",
-  "!src/app/dashboard/**",
-  "!src/app/login/**",
-  "!src/components/providers/**",
-  "!src/services/firebase.ts",
-  "!src/services/tasks/task.repository.ts",
-  "!src/services/tasks/task.types.ts",
-  "!src/services/auth/auth.types.ts",
-  "!src/services/auth/session.edge.ts",
-  "!src/services/auth/session.service.ts",
-],
+    "src/**/*.{ts,tsx}",
+    "!src/**/*.d.ts",
+    "!src/**/__tests__/**",
+    "!src/app/**/page.tsx",
+    "!src/app/**/layout.tsx",
+    "!src/app/api/logout/**",
+    "!src/app/api/tasks/**",
+    "!src/app/dashboard/**",
+    "!src/app/login/**",
+    "!src/components/providers/**",
+    "!src/services/firebase.ts",
+    "!src/services/tasks/task.repository.ts",
+    "!src/services/tasks/task.types.ts",
+    "!src/services/auth/auth.types.ts",
+    "!src/services/auth/session.edge.ts",
+    "!src/services/auth/session.service.ts",
+  ],
   coverageThreshold: {
     global: {
       statements: 85,
@@ -36,6 +36,12 @@ const config: Config = {
       lines: 85,
     },
   },
+  testEnvironmentOptions: {
+    customExportConditions: [""],
+  },
+  transformIgnorePatterns: [
+  "/node_modules/(?!(msw|@mswjs|until-async)/)",
+],
 };
 
 export default createJestConfig(config);

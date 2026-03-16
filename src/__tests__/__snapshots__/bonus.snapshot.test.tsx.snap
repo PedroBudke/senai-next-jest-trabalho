@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bônus 2 — Snapshot Tests TaskComposer corresponde ao snapshot 1`] = `
+<div>
+  <form
+    class="task-composer"
+  >
+    <input
+      name="taskTitle"
+      placeholder="Nova tarefa..."
+      type="text"
+      value=""
+    />
+    <button
+      type="submit"
+    >
+      Adicionar
+    </button>
+  </form>
+</div>
+`;
+
+exports[`Bônus 2 — Snapshot Tests TaskList com itens corresponde ao snapshot 1`] = `
+<div>
+  <ul
+    class="task-list"
+  >
+    <li
+      class="task-item"
+    >
+      <label>
+        <input
+          type="checkbox"
+        />
+        <span
+          class="task-title"
+        >
+          Estudar Jest
+        </span>
+      </label>
+      <button
+        class="ghost danger"
+        type="button"
+      >
+        Deletar
+      </button>
+    </li>
+    <li
+      class="task-item"
+    >
+      <label>
+        <input
+          checked=""
+          type="checkbox"
+        />
+        <span
+          class="task-title task-done"
+        >
+          Fazer exercícios
+        </span>
+      </label>
+      <button
+        class="ghost danger"
+        type="button"
+      >
+        Deletar
+      </button>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Bônus 2 — Snapshot Tests TaskList vazia corresponde ao snapshot 1`] = `
+<div>
+  <p
+    class="hint"
+  >
+    Nenhuma tarefa cadastrada ainda.
+  </p>
+</div>
+`;
