@@ -106,4 +106,25 @@ describe("useAuth fora do Provider", () => {
 
     consoleError.mockRestore();
   });
+
+  it("chama logout e redireciona para /login", async () => {
+  global.fetch = jest.fn().mockResolvedValue({ ok: true, json: async () => ({}) });
+
+  function TestLogout() {
+    const { logout } = useAuth();
+    return <button onClick={logout}>Logout</button>;
+  }
+
+  const user = userEvent.setup();
+  render(
+    <AuthProvider initialUser={{ id: "1", name: "Test", email: "test@test.com" }}>
+      <TestLogout />
+    </AuthProvider>,
+  );
+
+  await user.click(screen.getByRole("button", { name: /logout/i }));
+  await waitFor(() => {
+    expect(mockPush).toHaveBeenCalledWith("/login");
+  });
+});
 });
